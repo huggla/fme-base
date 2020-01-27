@@ -9,6 +9,9 @@ RUN apt update \
  && wget $FMEDL \
  && apt-get -y purge wget \
  && apt-get -y autoremove \
- && dpkg -i *.deb \
+ && dpkg -i *.deb ; rm -rf /tmp/dl \
  && apt-get -y install -f \
- && rm -rf /tmp/dl
+ && cd /opt \
+ && ln -s $(ls /opt) fme
+ 
+ ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
