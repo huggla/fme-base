@@ -16,8 +16,8 @@ RUN apt-get -q update \
  && apt-get -y install -f \
  && ln -fs /usr/share/$TZ /etc/localtime \
  && dpkg-reconfigure --frontend noninteractive tzdata \
- && ln -s $(ls /opt) fme \
- && rm -rf /var/lib/apt/lists/*
+ && rm -rf /var/lib/apt/lists/* /opt/* \
+ && mkdir -p fme
  
  ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
  
