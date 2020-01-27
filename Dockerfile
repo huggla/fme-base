@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
  && apt-get -y install wget \
  && mkdir -p /tmp/dl \
  && cd /tmp/dl \
- && wget $FMEDL \
+ && wget -q $FMEDL \
  && apt-get -y purge wget \
  && apt-get -y autoremove \
  && dpkg -i *.deb ; cd /opt \
