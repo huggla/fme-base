@@ -12,6 +12,7 @@ RUN apt update \
  && dpkg -i *.deb ; rm -rf /tmp/dl \
  && apt-get -y install -f \
  && cd /opt \
- && ln -s $(ls /opt) fme
+ && ln -s $(ls /opt) fme \
+ && rm -rf /var/lib/apt/lists/*
  
  ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
