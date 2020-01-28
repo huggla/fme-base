@@ -2,7 +2,8 @@ FROM ubuntu:18.04
 
 ARG FMEDL="https://downloads.safe.com/fme/2019/fme-desktop-2019_2019.2.2.0.19817~ubuntu.18.04_amd64.deb"
 
-RUN apt-get -q update \
+RUN set -x \
+ && apt-get -q update \
  && apt-get -y --no-install-recommends install wget xrdp \
  && mkdir -p /tmp/dl \
  && cd /tmp/dl \
