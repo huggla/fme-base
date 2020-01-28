@@ -5,7 +5,7 @@ ARG TZ="Europe/Stockholm"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get -q update \
- && apt-get -y install wget \
+ && apt-get -y install wget xrdp \
  && mkdir -p /tmp/dl \
  && cd /tmp/dl \
  && wget -q $FMEDL \
