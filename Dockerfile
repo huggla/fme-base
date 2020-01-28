@@ -7,11 +7,10 @@ RUN set -x \
  && apt-get -y --no-install-recommends install wget xrdp \
  && mkdir -p /tmp/dl \
  && cd /tmp/dl \
- && wget $FMEDL \
+ && wget --no-check-certificate $FMEDL \
  && apt-get -y purge wget \
  && apt-get -y autoremove \
- && dpkg -i *.deb \
- || cd /opt \
+ && dpkg -i *.deb ; cd / \
  && rm -rf /tmp/dl \
  && apt-get -y --no-install-recommends install -f \
  && rm -rf /var/lib/apt/lists/* /opt/* \
