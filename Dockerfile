@@ -5,7 +5,7 @@ ARG TZ="Europe/Stockholm"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get -q update \
- && apt-get -y install wget xrdp \
+ && apt-get -y --no-install-recommends install wget xrdp \
  && mkdir -p /tmp/dl \
  && cd /tmp/dl \
  && wget -q $FMEDL \
@@ -13,7 +13,7 @@ RUN apt-get -q update \
  && apt-get -y autoremove \
  && dpkg -i *.deb ; cd /opt \
  && rm -rf /tmp/dl \
- && apt-get -y install -f \
+ && apt-get -y --no-install-recommends install -f \
  && ln -fs /usr/share/$TZ /etc/localtime \
  && dpkg-reconfigure --frontend noninteractive tzdata \
  && rm -rf /var/lib/apt/lists/* /opt/* \
