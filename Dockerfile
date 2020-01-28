@@ -14,10 +14,8 @@ RUN apt-get -q update \
  && dpkg -i *.deb ; cd /opt \
  && rm -rf /tmp/dl \
  && apt-get -y --no-install-recommends install -f \
- && ln -fs /usr/share/$TZ /etc/localtime \
- && dpkg-reconfigure --frontend noninteractive tzdata \
  && rm -rf /var/lib/apt/lists/* /opt/* \
- && mkdir -p fme
+ && mkdir -p /opt/fme
  
  ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
  
