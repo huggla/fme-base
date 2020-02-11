@@ -18,3 +18,6 @@ RUN set -x \
  
  ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
  
+WORKDIR /work
+ENTRYPOINT ["/bin/sh", "-c"]
+CMD ['while true; do $(ls | head -n 1); sleep 1; done']
