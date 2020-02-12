@@ -6,9 +6,11 @@ RUN apt-get -q update \
  && mkdir -p /opt/fme \
  && echo '#!/bin/sh' > /workrunner \
  && echo 'while true; do (executable="$(ls | head -n 1)" && (set -x && ./$executable; rm $executable; set +x)); sleep 1; done' >> /workrunner \
- && chmod +x /workrunner
+ && chmod +x /workrunner \
+ && adduser --gecos '' user \
  
  ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
- 
+
+USER user
 WORKDIR /work
 CMD ['/workrunner']
