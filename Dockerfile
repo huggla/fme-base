@@ -14,4 +14,4 @@ WORKDIR /work
 
 ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
 
-CMD ['run_work']
+CMD ["run_work"]
