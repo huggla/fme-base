@@ -8,7 +8,7 @@ RUN apt-get -q update \
  && rm -rf /var/lib/apt/lists/* \
  && mkdir -p /opt/fme \
  && echo '#!/bin/bash' > /usr/local/bin/run_work \
- && echo 'while true; do executable="$(ls | head -n 1)"; if [ -n "$executable" ]; then set -x; "./$executable"; rm "$executable"; set +x; fi; sleep 1; done' >> /usr/local/bin/run_work \
+ && echo 'while true; do executable="$(ls | head -n 1)"; if [ -n "$executable" ]; then echo "Executing /work/$executable"; "./$executable"; echo "Deleting /work/$executable"; rm "$executable"; fi; sleep 1; done' >> /usr/local/bin/run_work \
  && chmod +x /usr/local/bin/run_work \
  && useradd --create-home --home /work --shell /bin/bash worker \
  && ln -fs /usr/share/$TZ /etc/localtime \
