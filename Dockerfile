@@ -1,18 +1,8 @@
 FROM ubuntu:18.04
 
-ARG FMEDL="https://downloads.safe.com/fme/2019/fme-desktop-2019_2019.2.2.0.19817~ubuntu.18.04_amd64.deb"
-
 RUN set -x \
  && apt-get -q update \
- && apt-get -y --no-install-recommends install wget xrdp \
- && mkdir -p /tmp/dl \
- && cd /tmp/dl \
- && wget --no-check-certificate $FMEDL \
- && apt-get -y purge wget \
- && apt-get -y autoremove \
- && dpkg -i *.deb ; cd / \
- && rm -rf /tmp/dl \
- && apt-get -y --no-install-recommends install -f \
+ && apt-get -y --no-install-recommends install libtcmalloc-minimal4 libqt5core5a libboost-system1.65.1 libboost-thread1.65.1 libtcl8.5 libjpeg-turbo8 libfreetype6 libssl1.1 libssh2-1 libboost-filesystem1.65.1 libboost-regex1.65.1 libboost-iostreams1.65.1 libcgroup1 libqt5network5 libboost-locale1.65.1 libsqlite3-0 libmpfr6 libexpat1 libxml2 libqt5sql5 \
  && rm -rf /var/lib/apt/lists/* /opt/* \
  && mkdir -p /opt/fme
  
@@ -20,4 +10,4 @@ RUN set -x \
  
 WORKDIR /work
 ENTRYPOINT ["/bin/sh", "-c"]
-CMD ['while true; do $(ls | head -n 1); sleep 1; done']
+CMD ['while true; do (executable="$(ls | head -n 1)" && (./$executable; rm $executable)); sleep 1; done']
