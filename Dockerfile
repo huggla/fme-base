@@ -5,7 +5,7 @@ RUN apt-get -q update \
  && rm -rf /var/lib/apt/lists/* \
  && mkdir -p /opt/fme \
  && echo '#!/bin/sh' > /workrunner \
- && echo 'while true; do (executable="$(ls | head -n 1)" && (set -x && ./$executable; rm $executable; set +x)); sleep 1; done' >> /workrunner \
+ && echo 'while true; do (executable="$(ls | head -n 1)"; if [ -n "$executable" ]; then set -x; "./$executable"; rm "$executable"; set +x; fi; sleep 1; done' >> /workrunner \
  && chmod +x /workrunner \
  && adduser --gecos '' user \
  
