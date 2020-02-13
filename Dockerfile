@@ -10,7 +10,7 @@ RUN apt-get -q update \
  && rm -rf /var/lib/apt/lists/* \
  && echo '#!/bin/bash' > /usr/local/bin/autoexecute \
  && echo 'mkdir -m 777 -p /fme-shared/CoordinateSystemExceptions /fme-shared/CoordinateSystemGridOverrides /fme-shared/CoordinateSystems /fme-shared/CsmapTransformationExceptions /fme-shared/Formats /fme-shared/TransformerCategories /fme-shared/Transformers /fme-shared/Workspaces /fme-shared/AutoExecute /fme-shared/AutoExecute/Finished' >> /usr/local/bin/autoexecute \
- && echo 'while true; do executable="$(find /fme-shared/AutoExecute -type f -print -quit)"; if [ -n "$executable" ]; then echo "Executing $executable"; "$executable"; mv -f "$executable" /fme-shared/AutoExecute/Finished/; fi; sleep 1; done' >> /usr/local/bin/autoexecute \
+ && echo 'while true; do executable="$(find /fme-shared/AutoExecute -maxdepth 1 -type f -print -quit)"; if [ -n "$executable" ]; then echo "Executing $executable"; "$executable"; mv -f "$executable" /fme-shared/AutoExecute/Finished/; fi; sleep 1; done' >> /usr/local/bin/autoexecute \
  && useradd --create-home --shell /bin/bash $LINUX_USER \
  && chown $LINUX_USER:$LINUX_USER /usr/local/bin/autoexecute \
  && chmod u=rx,go= /usr/local/bin/autoexecute \
