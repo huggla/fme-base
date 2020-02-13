@@ -17,7 +17,8 @@ RUN apt-get -q update \
  && ln -s /fme-shared /home/$LINUX_USER/.fme \
  && ln -fns /usr/share/zoneinfo/$TZ /etc/localtime \
  && echo $TZ > /etc/timezone \
- && echo "LANG=C.UTF-8" > /etc/default/locale
+ && echo "LANG=C.UTF-8" > /etc/default/locale \
+ && echo "LC_ALL=C.UTF-8" >> /etc/default/locale
 
 USER fme
 WORKDIR /workspaces
