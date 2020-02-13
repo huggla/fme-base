@@ -18,6 +18,7 @@ RUN apt-get -q update \
 USER fme
 WORKDIR /workspaces
 
-ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
+ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme" \
+    LANG="C.UTF-8"
 
 CMD ["execute-service"]
