@@ -16,13 +16,13 @@ RUN apt-get -q update \
  && chown $LINUX_USER:$LINUX_USER /fme-shared \
  && ln -s /fme-shared /home/$LINUX_USER/.fme \
  && ln -fns /usr/share/zoneinfo/$TZ /etc/localtime \
- && echo $TZ > /etc/timezone \
- && echo "LANG=C.UTF-8" > /etc/default/locale \
- && echo "LC_ALL=C.UTF-8" >> /etc/default/locale
+ && echo $TZ > /etc/timezone
 
-USER fme
+USER $LINUX_USER
 WORKDIR /workspaces
 
-ENV PATH="PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme"
+ENV PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/fme" \
+    LANG="C.UTF-8" \
+    LC_ALL="C.UTF-8"
 
 CMD ["execute-service"]
