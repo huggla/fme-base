@@ -9,7 +9,7 @@ RUN apt-get -q update \
  && rm -rf /var/lib/apt/lists/* \
  && mkdir -p /opt/fme /execute-dir \
  && echo '#!/bin/bash' > /usr/local/bin/execute-service \
- && echo 'while true; do executable="$(ls /execute-dir | head -n 1)"; if [ -n "$executable" ]; then echo "Executing $executable"; "$executable"; echo "Deleting $executable"; rm "$executable"; fi; sleep 1; done' >> /usr/local/bin/execute-service \
+ && echo 'while true; do executable="$(ls /execute-dir | head -n 1)"; if [ -n "/execute-dir/$executable" ]; then echo "Executing $executable"; "/execute-dir/$executable"; echo "Deleting $executable"; rm "/execute-dir/$executable"; fi; sleep 1; done' >> /usr/local/bin/execute-service \
  && chmod +x /usr/local/bin/execute-service \
  && useradd --create-home --shell /bin/bash fme \
  && ln -fns /usr/share/zoneinfo/$TZ /etc/localtime \
