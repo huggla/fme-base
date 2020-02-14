@@ -12,10 +12,10 @@ RUN apt-get -q update \
  && echo 'mkdir -m 777 -p /fme-shared/CoordinateSystemExceptions /fme-shared/CoordinateSystemGridOverrides /fme-shared/CoordinateSystems /fme-shared/CsmapTransformationExceptions /fme-shared/Formats /fme-shared/TransformerCategories /fme-shared/Transformers /fme-shared/Workspaces /fme-shared/AutoExecute /fme-shared/AutoExecute/Finished' >> /usr/local/bin/autoexecute \
  && echo 'while true; do executable="$(find /fme-shared/AutoExecute -maxdepth 1 -type f -print -quit)"; if [ -n "$executable" ]; then echo "Executing $executable"; "$executable"; mv -f "$executable" /fme-shared/AutoExecute/Finished/; fi; sleep 1; done' >> /usr/local/bin/autoexecute \
  && useradd --create-home --shell /bin/bash $LINUX_USER \
- && chown $LINUX_USER:$LINUX_USER /usr/local/bin/autoexecute \
+ && mkdir -p /opt/fme /fme-shared /home/$LINUX_USER/.SafeSoftware/FME \
+ && echo "SQLite format 3" > /home/$LINUX_USER/.SafeSoftware/FME/fme_connections.data \
+ && chown -R $LINUX_USER:$LINUX_USER /usr/local/bin/autoexecute /fme-shared /home/$LINUX_USER \
  && chmod u=rx,go= /usr/local/bin/autoexecute \
- && mkdir -p /opt/fme /fme-shared \
- && chown -R $LINUX_USER:$LINUX_USER /fme-shared \
  && ln -s /fme-shared /home/$LINUX_USER/.fme \
  && ln -fns /usr/share/zoneinfo/$TZ /etc/localtime \
  && echo $TZ > /etc/timezone
