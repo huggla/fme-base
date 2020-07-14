@@ -11,7 +11,7 @@ RUN apt-get -q update \
  && echo '#!/bin/bash' > /usr/bin/autoexecute \
  && echo 'mkdir -m 770 -p /fme-shared/CoordinateSystemExceptions /fme-shared/CoordinateSystemGridOverrides /fme-shared/CoordinateSystems /fme-shared/CsmapTransformationExceptions /fme-shared/Formats /fme-shared/TransformerCategories /fme-shared/Transformers /fme-shared/Workspaces /fme-shared/AutoExecute /fme-shared/AutoExecute/Finished' >> /usr/bin/autoexecute \
  && echo 'if [ ! -f "/fme-licenses/fme.uuid" ]; then uuidgen > "/fme-licenses/fme.uuid"; fi' >> /usr/bin/autoexecute \
- && echo 'while true; do executable="$(find /fme-shared/AutoExecute -maxdepth 1 -type f -print -quit)"; if [ -n "$executable" ]; then date; bash -v "$executable"; mv -f "$executable" /fme-shared/AutoExecute/Finished/; touch "/fme-shared/AutoExecute/Finished/$(basename "$executable")"; date; fi; sleep 1; done' >> /usr/bin/autoexecute \
+ && echo 'while true; do executable="$(find /fme-shared/AutoExecute -maxdepth 1 -type f -print -quit)"; if [ -n "$executable" ]; then date; bash -v "$executable"; mv -f "$executable" /fme-shared/AutoExecute/Finished/; touch "/fme-shared/AutoExecute/Finished/$(basename "$executable")"; sync; date; fi; sleep 1; done' >> /usr/bin/autoexecute \
  && useradd --create-home --shell /usr/sbin/nologin --system --uid 102 --gid 0 $LINUX_USER \
  && mkdir -m 770 -p /opt/fme /fme-shared /fme-licenses /connection-storage /usr/share/FME "/home/$LINUX_USER/.Safe Software" \
  && echo "SQLite format 3" > /connection-storage/fme_connections.data \
